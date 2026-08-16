@@ -51,7 +51,7 @@
 <script>
 "use strict";
 /* ============================================================
-   SUPER PIXEL BROS — a single-file platformer
+    CIRCUS JUMPER — a single-file platformer
    ============================================================ */
 const cv = document.getElementById("game");
 const cx = cv.getContext("2d");
@@ -255,186 +255,198 @@ function flipSprite(img){
 
 const SPR = {};
 (function buildSprites(){
-  const SM = [
-    "....RRRRR...",
-    "...RRRRRRRRR",
-    "...HHHSSSES.",
-    "..HSHSSSESES",
-    "..HSHHSSSEES",
-    "..HHSSSSSSEE",
-    "...SSSSSSSS.",
-    "..RRRBBBRR..",
-    ".RRRRBBBBRRR",
-    "RRRRBBBBBBRR",
-    "RRRBBBBBBBRR",
-    ".SSBBBBBBSS.",
-    ".SSBBBBBBSS.",
-    "..OOOBBBOO..",
-    ".OOOOBBBOOO.",
-    "OOOOO..OOOOO",
+  // ---- Ringmaster (player) ----
+  const RM_IDLE = [
+    "....KKKK....",
+    "....KKKK....",
+    "...KKKKKK...",
+    "...RRRRRR...",
+    "KKKKKKKKKKKK",
+    "...SSSSES...",
+    "..SSSSSSES..",
+    "..SSSSSSSSE.",
+    "...SSSSSSS..",
+    "..RRWWRRWW..",
+    ".RRWWRRWWRR.",
+    ".RRWWRRWWRR.",
+    ".RRWWRRWWRR.",
+    "..DDDDDDDD..",
+    "..DDDDDDDD..",
+    ".KKKK..KKKK.",
   ];
-  const SM_RUN1 = SM.map((r,i)=> i>=13 ? r.replace("O","o") : r);
-  const SM_RUN2 = [
-    "....RRRRR...",
-    "...RRRRRRRRR",
-    "...HHHSSSES.",
-    "..HSHSSSESES",
-    "..HSHHSSSEES",
-    "..HHSSSSSSEE",
-    "...SSSSSSSS.",
-    "..RRRBBBRR..",
-    ".RRRRBBBBRRR",
-    "RRRRBBBBBBRR",
-    "RRRBBBBBBBRR",
-    ".SSBBBBBBSS.",
-    ".SSBBBBBBSS.",
-    "..OOO..OOO..",
-    ".OOO....OOO.",
-    "OOO..OO..OOO",
+  const RM_RUN1 = [
+    "....KKKK....",
+    "....KKKK....",
+    "...KKKKKK...",
+    "...RRRRRR...",
+    "KKKKKKKKKKKK",
+    "...SSSSES...",
+    "..SSSSSSES..",
+    "..SSSSSSSSE.",
+    "...SSSSSSS..",
+    "..RRWWRRWW..",
+    ".RRWWRRWWRR.",
+    ".RRWWRRWWRR.",
+    ".RRWWRRWWRR.",
+    "..DDDDDDDD..",
+    "..DD..DDDD..",
+    ".KKK....KKK.",
   ];
-  const SM_JUMP = [
-    "....RRRRR...",
-    "...RRRRRRRRR",
-    "...HHHSSSES.",
-    "..HSHSSSESES",
-    "..HSHHSSSEES",
-    "..HHSSSSSSEE",
-    "...SSSSSSSS.",
-    "RRRRRBBBRRRR",
-    "SSRRBBBBRRSS",
-    "SSRBBBBBBRSS",
-    ".RRBBBBBBRR.",
-    ".SSBBBBBBSS.",
-    "..OOBBBBOO..",
-    ".OOOBBBBOOO.",
-    "OOOOO.OOOOOO",
+  const RM_RUN2 = [
+    "....KKKK....",
+    "....KKKK....",
+    "...KKKKKK...",
+    "...RRRRRR...",
+    "KKKKKKKKKKKK",
+    "...SSSSES...",
+    "..SSSSSSES..",
+    "..SSSSSSSSE.",
+    "...SSSSSSS..",
+    "..RRWWRRWW..",
+    ".RRWWRRWWRR.",
+    ".RRWWRRWWRR.",
+    ".RRWWRRWWRR.",
+    "..DDDDDDDD..",
+    ".DDDD..DDDD.",
+    "KKKK....KKKK",
+  ];
+  const RM_JUMP = [
+    "....KKKK....",
+    "....KKKK....",
+    "...KKKKKK...",
+    "...RRRRRR...",
+    "KKKKKKKKKKKK",
+    "...SSSSES...",
+    "..SSSSSSES..",
+    "..SSSSSSSSE.",
+    "...SSSSSSS..",
+    "RRRRWWWWRRRR",
+    "SSRRWWWWRRSS",
+    ".RRWWWWWWRR.",
+    ".RRWWWWWWRR.",
+    "..DDDDDDDD..",
+    "..DDDDDDDD..",
     "............",
   ];
-  const BG = [
-    "....RRRRR...",
-    "...RRRRRRRRR",
-    "...HHHSSSES.",
-    "..HSHSSSESES",
-    "..HSHHSSSEES",
-    "..HHSSSSSSEE",
-    "...SSSSSSSS.",
-    "..RRRBBBRR..",
-    ".RRRRBBBBRRR",
-    "RRRRBBBBBBRR",
-    "RRRBBBBBBBRR",
-    "RRRBBBBBBBRR",
-    ".SSBBBBBBSS.",
-    ".SSBBBBBBSS.",
-    "..BBBBBBBB..",
-    "..BBBBBBBB..",
-    "..OOBBBBOO..",
-    ".OOOBBBBOOO.",
-    "OOOOO.OOOOOO",
+  const RMB_IDLE = [
+    "....KKKK....",
+    "....KKKK....",
+    "...KKKKKK...",
+    "...RRRRRR...",
+    "KKKKKKKKKKKK",
+    "...SSSSES...",
+    "..SSSSSSES..",
+    "..SSSSSSSSE.",
+    "...SSSSSSS..",
+    "..RRWWRRWW..",
+    ".RRWWRRWWRR.",
+    ".RRWWRRWWRR.",
+    ".RRWWRRWWRR.",
+    ".RRWWRRWWRR.",
+    ".RRWWRRWWRR.",
+    ".RRWWRRWWRR.",
+    "..DDDDDDDD..",
+    "..DDDDDDDD..",
+    "..DDDDDDDD..",
+    ".KKKK..KKKK.",
   ];
-  const BG_RUN2 = [
-    "....RRRRR...",
-    "...RRRRRRRRR",
-    "...HHHSSSES.",
-    "..HSHSSSESES",
-    "..HSHHSSSEES",
-    "..HHSSSSSSEE",
-    "...SSSSSSSS.",
-    "..RRRBBBRR..",
-    ".RRRRBBBBRRR",
-    "RRRRBBBBBBRR",
-    "RRRBBBBBBBRR",
-    "RRRBBBBBBBRR",
-    ".SSBBBBBBSS.",
-    ".SSBBBBBBSS.",
-    "..BBBBBBBB..",
-    "..BBBBBBBB..",
-    "..OOO..OOO..",
-    ".OOO....OOO.",
-    "OOO..OO..OOO",
+  const RMB_RUN2 = [
+    "....KKKK....",
+    "....KKKK....",
+    "...KKKKKK...",
+    "...RRRRRR...",
+    "KKKKKKKKKKKK",
+    "...SSSSES...",
+    "..SSSSSSES..",
+    "..SSSSSSSSE.",
+    "...SSSSSSS..",
+    "..RRWWRRWW..",
+    ".RRWWRRWWRR.",
+    ".RRWWRRWWRR.",
+    ".RRWWRRWWRR.",
+    ".RRWWRRWWRR.",
+    ".RRWWRRWWRR.",
+    ".RRWWRRWWRR.",
+    "..DDDDDDDD..",
+    ".DDDD..DDDD.",
+    "..DDDDDDDD..",
+    "KKKK....KKKK",
   ];
-  const BG_JUMP = [
-    "....RRRRR...",
-    "...RRRRRRRRR",
-    "...HHHSSSES.",
-    "..HSHSSSESES",
-    "..HSHHSSSEES",
-    "..HHSSSSSSEE",
-    "...SSSSSSSS.",
-    "RRRRRBBBRRRR",
-    "SSRRBBBBRRSS",
-    "SSRBBBBBBRSS",
-    ".RRBBBBBBRR.",
-    ".RRBBBBBBRR.",
-    "..BBBBBBBB..",
-    "..BBBBBBBB..",
-    "..OOBBBBOO..",
-    ".OOOBBBBOOO.",
-    "OOOOO.OOOOOO",
+  const RMB_JUMP = [
+    "....KKKK....",
+    "....KKKK....",
+    "...KKKKKK...",
+    "...RRRRRR...",
+    "KKKKKKKKKKKK",
+    "...SSSSES...",
+    "..SSSSSSES..",
+    "..SSSSSSSSE.",
+    "...SSSSSSS..",
+    "RRRRWWWWRRRR",
+    "SSRRWWWWRRSS",
+    ".RRWWWWWWRR.",
+    ".RRWWWWWWRR.",
+    ".RRWWWWWWRR.",
+    ".RRWWWWWWRR.",
+    "..DDDDDDDD..",
+    "..DDDDDDDD..",
+    "..DDDDDDDD..",
+    "............",
     "............",
   ];
-  SPR.mSmall  = { idle: makeSprite(SM),  run:[makeSprite(SM_RUN1), makeSprite(SM_RUN2)], jump: makeSprite(SM_JUMP) };
-  SPR.mBig    = { idle: makeSprite(BG),  run:[makeSprite(BG), makeSprite(BG_RUN2)], jump: makeSprite(BG_JUMP) };
+  SPR.mSmall = { idle: makeSprite(RM_IDLE), run:[makeSprite(RM_RUN1), makeSprite(RM_RUN2)], jump: makeSprite(RM_JUMP) };
+  SPR.mBig   = { idle: makeSprite(RMB_IDLE), run:[makeSprite(RMB_IDLE), makeSprite(RMB_RUN2)], jump: makeSprite(RMB_JUMP) };
 
-  const GOOMBA1 = [
-    "....MMMMMM....",
-    "..MMMMMMMMMM..",
-    ".MMMMMMMMMMMM.",
-    ".MMWWMMMMWWMM.",
-    ".MMWKMMMMWKMM.",
-    "MMMMMMMMMMMMMM",
-    "MMMMMMMMMMMMMM",
-    "MMMMMMMMMMMMMM",
-    ".MMMMMMMMMMMM.",
-    "..MMMMMMMMMM..",
-    "..WWWW..WWWW..",
-    ".WWWWWW.WWWWW.",
+  // ---- Clown (enemy) ----
+  const CLOWN1 = [
+    "............",
+    ".YY..YY..YY.",
+    "YYYYYYYYYYYY",
+    ".YYWWWWWWYY.",
+    ".YYWWWWWWYY.",
+    ".WWWWWWWWWW.",
+    ".WWEEWWEEWW.",
+    ".WWWWRRWWWW.",
+    ".WWWWRRWWWW.",
+    "..WWWWWWWW..",
+    "..WRRRRRRW..",
+    ".KKK....KKK.",
   ];
-  const GOOMBA2 = [
-    "....MMMMMM....",
-    "..MMMMMMMMMM..",
-    ".MMMMMMMMMMMM.",
-    ".MMWWMMMMWWMM.",
-    ".MMWKMMMMWKMM.",
-    "MMMMMMMMMMMMMM",
-    "MMMMMMMMMMMMMM",
-    "MMMMMMMMMMMMMM",
-    ".MMMMMMMMMMMM.",
-    "..MMMMMMMMMM..",
-    ".WWWW..WWWW...",
-    "WWWWWW.WWWWW..",
+  const CLOWN2 = [
+    "............",
+    ".YY..YY..YY.",
+    "YYYYYYYYYYYY",
+    ".YYWWWWWWYY.",
+    ".YYWWWWWWYY.",
+    ".WWWWWWWWWW.",
+    ".WWEEWWEEWW.",
+    ".WWWWRRWWWW.",
+    ".WWWWRRWWWW.",
+    "..WWWWWWWW..",
+    "..WRRRRRRW..",
+    "KKKK....KKKK",
   ];
-  SPR.goomba = [makeSprite(GOOMBA1), makeSprite(GOOMBA2)];
+  SPR.clown = [makeSprite(CLOWN1), makeSprite(CLOWN2)];
 
-  const PARA = [
-    "WW..........WW",
-    "WWW..MMMM..WWW",
-    "WWWWMMMMMMWWWW",
-    ".WWMMMMMMMMWW.",
-    "..MMWWMMWWMM..",
-    "..MMWKMMWKMM..",
-    "..MMMMMMMMMM..",
-    "...MMMMMMMM...",
-    "...MMMMMMMM...",
-    "...WWWWWWWW...",
-    "..WWWWWWWWWW..",
-  ];
-  SPR.para = makeSprite(PARA);
+  // ---- Aerial clown (falls from the sky) ----
+  SPR.flyclown = makeSprite(CLOWN1);
 
-  const MUSH = [
-    "....FFFFF.....",
-    "..FFFFFFFFF...",
-    ".FFWWFFFFWWFF.",
-    ".FWFFFFFFFWFF.",
-    "FFFFFFFFFFFFFF",
-    "FFFFFFFFFFFFFF",
-    ".FFFFFFFFFFF..",
-    "..SSSSSSSSS...",
-    "..SSESSSSES...",
-    "..SSSSSSSSS...",
-    "..SSSSSSSSS...",
-    "...SSSSSSS....",
+  // ---- Top hat (power-up) ----
+  const HAT = [
+    "............",
+    "...KKKKKK...",
+    "...KKKKKK...",
+    "...KKKKKK...",
+    "...KKKKKK...",
+    "...RRRRRR...",
+    "...RRRRRR...",
+    "KKKKKKKKKKKK",
+    "KKKKKKKKKKKK",
+    "............",
+    "............",
+    "............",
   ];
-  SPR.mush = makeSprite(MUSH);
+  SPR.tophat = makeSprite(HAT);
 
   const COIN = [
     "....CCCCC....",
@@ -483,25 +495,27 @@ const TILE = {};
   x.fillStyle = "#d8703c";
   x.fillRect(0,0,T,2); x.fillRect(0,17,7,2); x.fillRect(17,17,15,2);
   TILE.brick = g;
-  // question
+  // question (gift box)
   g = c(); x = g.getContext("2d");
-  x.fillStyle = "#f2a51e"; x.fillRect(0,0,T,T);
-  x.fillStyle = "#c77a10"; x.fillRect(0,0,T,2); x.fillRect(0,T-2,T,2); x.fillRect(0,0,2,T); x.fillRect(T-2,0,2,T);
-  x.fillStyle = "#ffe9a8"; x.fillRect(2,2,T-4,2); x.fillRect(2,2,2,T-4);
-  x.fillStyle = "#7a4a08";
-  [[4,4],[26,4],[4,26],[26,26]].forEach(p=>x.fillRect(p[0],p[1],3,3));
-  x.fillStyle = "#7a3a08";
-  x.fillRect(11,6,10,5); x.fillRect(18,11,5,8); x.fillRect(13,19,5,5); x.fillRect(11,24,10,4);
-  x.fillStyle = "#ffe9a8";
-  x.fillRect(13,8,6,1); x.fillRect(19,13,1,4);
+  x.fillStyle = "#e23b4e"; x.fillRect(0,0,T,T);          // red box
+  x.fillStyle = "#b02438"; x.fillRect(0,0,T,3); x.fillRect(0,T-3,T,3); // shading
+  x.fillStyle = "#ffd23e"; x.fillRect(13,0,6,T);         // vertical ribbon
+  x.fillStyle = "#e0a416"; x.fillRect(18,0,1,T);
+  x.fillStyle = "#ffd23e"; x.fillRect(0,13,T,6);         // horizontal ribbon
+  x.fillStyle = "#e0a416"; x.fillRect(0,18,T,1);
+  x.fillStyle = "#ffe9a8"; x.fillRect(2,2,T-4,2); x.fillRect(2,2,2,T-4); // highlight
+  // bow
+  x.fillStyle = "#ffd23e";
+  x.beginPath(); x.ellipse(13,16,5,3,-0.5,0,7); x.fill();
+  x.beginPath(); x.ellipse(19,16,5,3,0.5,0,7); x.fill();
+  x.fillStyle = "#e0a416"; x.fillRect(14,14,4,4);
   TILE.question = g;
-  // used
+  // used (opened box)
   g = c(); x = g.getContext("2d");
-  x.fillStyle = "#8a5a2a"; x.fillRect(0,0,T,T);
-  x.fillStyle = "#5f3c18"; x.fillRect(0,0,T,2); x.fillRect(0,T-2,T,2); x.fillRect(0,0,2,T); x.fillRect(T-2,0,2,T);
-  x.fillStyle = "#b5824a"; x.fillRect(2,2,T-4,2); x.fillRect(2,2,2,T-4);
-  x.fillStyle = "#5f3c18";
-  [[4,4],[26,4],[4,26],[26,26]].forEach(p=>x.fillRect(p[0],p[1],3,3));
+  x.fillStyle = "#9a4a58"; x.fillRect(0,0,T,T);
+  x.fillStyle = "#6e2f3c"; x.fillRect(0,0,T,3); x.fillRect(0,T-3,T,3);
+  x.fillStyle = "#5a2430"; x.fillRect(4,4,T-8,T-8);      // dark interior
+  x.fillStyle = "#c98a94"; x.fillRect(2,2,T-4,2); x.fillRect(2,2,2,T-4);
   TILE.used = g;
   // stairs (solid stone)
   g = c(); x = g.getContext("2d");
@@ -530,7 +544,7 @@ function makeLevel(def){
   const lv = {
     w: def.w, theme: def.theme, time: def.time || 300,
     grid: Array.from({length: ROWS}, () => new Array(def.w).fill(null)),
-    coins: [], enemies: [], platforms: [], flagX: def.flagX, castleX: def.castleX,
+    coins: [], enemies: [], platforms: [], flagX: def.flagX, tentX: def.tentX,
     start: { x: def.startX * T, y: 11 * T },
   };
   const set = (x, y, t) => { if (x >= 0 && x < lv.w && y >= 0 && y < ROWS) lv.grid[y][x] = t; };
@@ -559,88 +573,88 @@ function makeLevel(def){
       coin(x1+i, Math.round(yy));
     }
   };
-  const goomba = (x) => lv.enemies.push({ type:"goomba", x: x*T, y: 12*T - 22, w: 26, h: 22, vx: -0.7, vy: 0, alive: true, ph: Math.random()*6 });
-  const para = (x, y) => lv.enemies.push({ type:"para", x: x*T, y: y*T, w: 28, h: 22, vx: -0.55, vy: 0, alive: true, ph: Math.random()*6, baseY: y*T });
+  const clown = (x) => lv.enemies.push({ type:"clown", x: x*T, y: 12*T - 22, w: 26, h: 22, vx: -0.7, vy: 0, alive: true, ph: Math.random()*6 });
+  const flyclown = (x, y) => lv.enemies.push({ type:"flyclown", x: x*T, y: y*T, w: 28, h: 22, vx: -0.55, vy: 0, alive: true, ph: Math.random()*6, baseY: y*T });
   const plat = (x, y, len, dir) => lv.platforms.push({ x: x*T, y: y*T, w: len*T, h: 14, x0: x*T, range: dir, t: Math.random()*6, vx: 0 });
 
-  def.build(ground, block, brickRow, pipe, stairs, coin, coinArc, goomba, para, plat);
+  def.build(ground, block, brickRow, pipe, stairs, coin, coinArc, clown, flyclown, plat);
   return lv;
 }
 
 const LEVELS = [
   {
-    w: 220, theme: "day", time: 300, startX: 3, flagX: 198, castleX: 205,
-    build(g, b, br, pipe, stairs, coin, arc, goomba, para){
+    w: 220, theme: "day", time: 300, startX: 3, flagX: 198, tentX: 205,
+    build(g, b, br, pipe, stairs, coin, arc, clown, flyclown){
       g(0, 68); g(71, 85); g(89, 153); g(156, 219);
       b(16, 9, "question");
       br(20, 24, 9); b(21, 9, "question"); b(23, 9, "question"); b(22, 5, "question");
       pipe(28, 2); pipe(35, 3); pipe(42, 4); pipe(49, 4);
-      goomba(22); goomba(40); goomba(51); goomba(53);
+      clown(22); clown(40); clown(51); clown(53);
       b(78, 9, "brick"); b(79, 9, "question"); b(80, 9, "brick");
       arc(69, 70, 9);
       br(81, 84, 9); b(86, 9, "question");
-      goomba(80); goomba(82);
+      clown(80); clown(82);
       b(94, 9, "question"); b(95, 9, "question"); b(96, 9, "question");
       b(94, 5, "brick"); b(95, 5, "question"); b(96, 5, "brick");
-      goomba(100); goomba(102);
+      clown(100); clown(102);
       arc(106, 110, 8);
       br(112, 118, 9); b(115, 5, "question");
-      goomba(114); goomba(116);
+      clown(114); clown(116);
       b(124, 9, "brick"); b(125, 9, "brick"); b(126, 9, "question"); b(127, 9, "brick");
-      goomba(125);
+      clown(125);
       pipe(132, 2);
       arc(136, 140, 8);
-      goomba(138); goomba(140);
+      clown(138); clown(140);
       br(144, 147, 9);
       b(146, 5, "question");
-      goomba(145);
+      clown(145);
       stairs(150, 4, 1); stairs(155, 4, -1);
-      goomba(158);
+      clown(158);
       arc(157, 160, 8);
       b(165, 9, "question");
-      goomba(170); goomba(172);
+      clown(170); clown(172);
       br(175, 178, 9);
-      goomba(176);
+      clown(176);
       stairs(182, 8, 1);
       arc(184, 188, 7);
     }
   },
   {
-    w: 230, theme: "night", time: 300, startX: 3, flagX: 208, castleX: 215,
-    build(g, b, br, pipe, stairs, coin, arc, goomba, para){
+    w: 230, theme: "night", time: 300, startX: 3, flagX: 208, tentX: 215,
+    build(g, b, br, pipe, stairs, coin, arc, clown, flyclown){
       g(0, 40); g(44, 70); g(74, 96); g(100, 128); g(132, 160); g(164, 229);
       b(10, 9, "question"); b(14, 9, "question");
-      goomba(12); goomba(18);
+      clown(12); clown(18);
       pipe(22, 2); pipe(28, 3);
-      goomba(26);
+      clown(26);
       arc(41, 43, 9);
       br(48, 52, 9); b(50, 5, "question");
-      goomba(50); goomba(52);
-      para(58, 8);
+      clown(50); clown(52);
+      flyclown(58, 8);
       b(60, 9, "question"); b(64, 9, "question");
-      goomba(62);
+      clown(62);
       arc(71, 73, 9);
       br(78, 82, 9);
-      goomba(80); goomba(82);
-      para(88, 7);
+      clown(80); clown(82);
+      flyclown(88, 7);
       b(90, 9, "question");
       arc(97, 99, 9);
       br(104, 110, 9); b(107, 5, "question");
-      goomba(106); goomba(108); goomba(110);
+      clown(106); clown(108); clown(110);
       pipe(116, 3);
-      para(122, 8);
+      flyclown(122, 8);
       arc(129, 131, 9);
       br(136, 140, 9);
-      goomba(138);
+      clown(138);
       b(144, 9, "question"); b(148, 9, "question");
-      para(152, 7);
+      flyclown(152, 7);
       arc(161, 163, 9);
-      goomba(170); goomba(172);
+      clown(170); clown(172);
       br(176, 180, 9);
-      goomba(178);
+      clown(178);
       stairs(186, 4, 1);
       b(192, 9, "question");
-      goomba(196); goomba(198);
+      clown(196); clown(198);
       stairs(200, 8, 1);
       arc(202, 206, 7);
     }
@@ -743,7 +757,7 @@ function hitBlock(tx, ty){
     game.level.bump = { x: tx, y: ty, t: 0 };
     const px = tx*T + T/2, py = ty*T;
     if (Math.random() < 0.25 && !game.player.big){
-      game.parts.push({ type: "mush", x: tx*T + 4, y: ty*T - 4, vx: 0.6, vy: 0, t: 0, life: 99, rising: true, riseT: 0 });
+      game.parts.push({ type: "tophat", x: tx*T + 4, y: ty*T - 4, vx: 0.6, vy: 0, t: 0, life: 99, rising: true, riseT: 0 });
       SFX.power();
     } else {
       game.parts.push({ type: "coinpop", x: px, y: py - 8, vx: 0, vy: -7, t: 0, life: 0.6 });
@@ -914,7 +928,7 @@ function stepPlayer(dt){
         addScore(200, e.x + e.w/2, e.y - 10);
         SFX.stomp();
         game.shake = Math.max(game.shake, 2);
-        burst(e.x + e.w/2, e.y + e.h/2, "#a5622d", 8, 2);
+        burst(e.x + e.w/2, e.y + e.h/2, "#e23b4e", 8, 2);
       } else if (p.inv <= 0){
         if (p.big){
           p.big = false;
@@ -953,7 +967,7 @@ function stepEnemies(dt){
     if (!e.alive) continue;
     // activate when near camera
     if (e.x > game.camX + W + 60) continue;
-    if (e.type === "goomba"){
+    if (e.type === "clown"){
       e.vy += 0.5;
       if (e.vy > 10) e.vy = 10;
       e.x += e.vx;
@@ -973,7 +987,7 @@ function stepEnemies(dt){
           if (solidAt(tx, ty)){ e.y = ty*T - e.h; e.vy = 0; break; }
       }
       if (e.y > H + 80) e.alive = false;
-    } else if (e.type === "para"){
+    } else if (e.type === "flyclown"){
       e.ph += dt * 2.2;
       e.x += e.vx;
       e.y = e.baseY + Math.sin(e.ph) * 26;
@@ -994,7 +1008,7 @@ function stepEnemies(dt){
 
 function stepMushrooms(dt){
   for (const m of game.parts){
-    if (m.type !== "mush") continue;
+    if (m.type !== "tophat") continue;
     if (m.rising){
       m.riseT += dt;
       m.y -= 0.8;
@@ -1039,7 +1053,7 @@ function stepParticles(dt){
     m.t += dt;
     if (m.type === "coinpop"){
       m.vy += 0.4; m.y += m.vy;
-    } else if (m.type !== "mush"){
+    } else if (m.type !== "tophat"){
       m.vy += (m.grav || 10) * dt;
       m.x += m.vx; m.y += m.vy;
       if (m.rot !== undefined) m.rot += m.vr * dt;
@@ -1089,7 +1103,7 @@ function update(dt){
       } else {
         p.x += 2.2;
         p.runPh += 0.2;
-        if (p.x > (game.level.castleX - 2) * T){
+        if (p.x > (game.level.tentX - 2) * T){
           if (game.levelIdx + 1 < LEVELS.length) loadLevel(game.levelIdx + 1);
           else { game.state = "win"; }
         }
@@ -1264,36 +1278,62 @@ function drawFlag(){
   cx.beginPath(); cx.arc(fx - 22, fy + 12, 4, 0, 7); cx.fill();
 }
 
-function drawCastle(){
+function drawTent(){
   const cam = Math.round(game.camX);
-  const bx = game.level.castleX * T - cam;
-  if (bx < -160 || bx > W + 40) return;
+  const bx = game.level.tentX * T - cam;
+  if (bx < -180 || bx > W + 40) return;
   const by = 13 * T;
-  cx.fillStyle = "#b5502a";
-  cx.fillRect(bx, by - 96, 128, 96);
-  cx.fillStyle = "#8a3418";
-  for (let r = 0; r < 3; r++)
-    for (let c = 0; c < 4; c++)
-      cx.fillRect(bx + c * 32 + 2, by - 96 + r * 32 + 2, 28, 28);
-  cx.fillStyle = "#b5502a";
-  for (let c = 0; c < 4; c++){
-    cx.fillRect(bx + c * 32, by - 112, 20, 16);
+  const w = 160, bodyH = 58, roofH = 72;
+  const apexX = bx + w/2;
+  const roofBase = by - bodyH, roofTop = roofBase - roofH;
+  // body
+  cx.fillStyle = "#f4f0e6";
+  cx.fillRect(bx, roofBase, w, bodyH);
+  cx.fillStyle = "#e23b4e";
+  for (let i = 0; i < w; i += 32) cx.fillRect(bx + i, roofBase, 16, bodyH);
+  // scalloped valance
+  cx.fillStyle = "#e23b4e";
+  for (let i = 0; i < 8; i++){
+    cx.beginPath();
+    cx.arc(bx + i*20 + 10, roofBase, 10, 0, Math.PI);
+    cx.fill();
   }
-  // tower
-  cx.fillStyle = "#b5502a";
-  cx.fillRect(bx + 40, by - 160, 48, 64);
-  cx.fillStyle = "#8a3418";
-  cx.fillRect(bx + 44, by - 176, 12, 16);
-  cx.fillRect(bx + 60, by - 176, 12, 16);
-  cx.fillRect(bx + 76, by - 176, 12, 16);
-  // door
-  cx.fillStyle = "#1c1c24";
+  // conical striped roof
+  const stripes = 8;
+  for (let i = 0; i < stripes; i++){
+    const x1 = bx + (i/stripes)*w, x2 = bx + ((i+1)/stripes)*w;
+    cx.fillStyle = i % 2 === 0 ? "#e23b4e" : "#f4f0e6";
+    cx.beginPath();
+    cx.moveTo(apexX, roofTop);
+    cx.lineTo(x1, roofBase);
+    cx.lineTo(x2, roofBase);
+    cx.closePath();
+    cx.fill();
+  }
+  cx.strokeStyle = "#b02438"; cx.lineWidth = 2;
   cx.beginPath();
-  cx.moveTo(bx + 44, by);
-  cx.lineTo(bx + 44, by - 40);
-  cx.arc(bx + 64, by - 40, 20, Math.PI, 0);
-  cx.lineTo(bx + 84, by);
+  cx.moveTo(bx, roofBase);
+  cx.lineTo(apexX, roofTop);
+  cx.lineTo(bx + w, roofBase);
+  cx.stroke();
+  // arched door
+  cx.fillStyle = "#3a2412";
+  cx.beginPath();
+  cx.moveTo(apexX - 20, by);
+  cx.lineTo(apexX - 20, by - 32);
+  cx.arc(apexX, by - 32, 20, Math.PI, 0);
+  cx.lineTo(apexX + 20, by);
   cx.fill();
+  // top pole and flag
+  cx.fillStyle = "#8a5a2a";
+  cx.fillRect(apexX - 2, roofTop - 26, 4, 26);
+  cx.fillStyle = "#ffd23e";
+  cx.beginPath();
+  cx.moveTo(apexX + 2, roofTop - 26);
+  cx.lineTo(apexX + 26, roofTop - 20);
+  cx.lineTo(apexX + 2, roofTop - 14);
+  cx.fill();
+  cx.beginPath(); cx.arc(apexX, roofTop, 5, 0, 7); cx.fill();
 }
 
 function drawCoins(){
@@ -1315,13 +1355,13 @@ function drawEnemies(){
     if (sx < -60 || sx > W + 60) continue;
     if (!e.alive){
       cx.globalAlpha = Math.max(0, e.squash / 0.3);
-      cx.drawImage(SPR.goomba[0], sx, e.y + e.h - 12, e.w + 6, 12);
+      cx.drawImage(SPR.clown[0], sx, e.y + e.h - 12, e.w + 6, 12);
       cx.globalAlpha = 1;
       continue;
     }
-    if (e.type === "goomba"){
+    if (e.type === "clown"){
       const f = Math.floor(game.t * 8 + e.ph) % 2;
-      const img = SPR.goomba[f];
+      const img = SPR.clown[f];
       const flip = e.vx > 0;
       if (flip){
         cx.save(); cx.translate(sx + e.w, e.y); cx.scale(-1, 1);
@@ -1335,7 +1375,7 @@ function drawEnemies(){
       cx.fillStyle = f ? "#fff" : "#e73c2e";
       cx.beginPath(); cx.ellipse(sx + 4, e.y - 4, 8, 5, 0, 0, 7); cx.fill();
       cx.beginPath(); cx.ellipse(sx + e.w - 4, e.y - 4, 8, 5, 0, 0, 7); cx.fill();
-      cx.drawImage(SPR.para, sx - 2, e.y - 2, e.w + 4, e.h + 6);
+      cx.drawImage(SPR.flyclown, sx - 2, e.y - 2, e.w + 4, e.h + 6);
     }
   }
 }
@@ -1343,8 +1383,8 @@ function drawEnemies(){
 function drawMushrooms(){
   const cam = Math.round(game.camX);
   for (const m of game.parts){
-    if (m.type !== "mush") continue;
-    cx.drawImage(SPR.mush, m.x - cam - 2, m.y - 2, 28, 28);
+    if (m.type !== "tophat") continue;
+    cx.drawImage(SPR.tophat, m.x - cam - 2, m.y - 2, 28, 28);
   }
 }
 
@@ -1385,7 +1425,7 @@ function drawPlayer(){
 function drawParticles(){
   const cam = Math.round(game.camX);
   for (const m of game.parts){
-    if (m.type === "mush" || m.type === "coinpop") continue;
+    if (m.type === "tophat" || m.type === "coinpop") continue;
     cx.globalAlpha = Math.max(0, 1 - m.t / m.life);
     cx.fillStyle = m.color;
     if (m.brick){
@@ -1439,8 +1479,8 @@ function drawHUD(){
   drawText("COINS", 210, 14, 1, "#fff");
   cx.drawImage(SPR.coin, 214, 26, 14, 14);
   drawText("x" + String(game.coins).padStart(2, "0"), 234, 28, 1, "#fff");
-  drawText("WORLD", W/2 - 40, 14, 1, "#fff");
-  drawText((game.levelIdx + 1) + "-1", W/2 - 40, 28, 1, "#fff");
+  drawText("ACT", W/2 - 40, 14, 1, "#fff");
+  drawText(String(game.levelIdx + 1), W/2 - 40, 28, 1, "#fff");
   drawText("TIME", W - 190, 14, 1, "#fff");
   drawText(String(Math.ceil(game.time)).padStart(3, "0"), W - 190, 28, 1, game.time < 60 ? "#ff5a4a" : "#fff");
   drawText("LIVES", W - 90, 14, 1, "#fff");
@@ -1468,7 +1508,7 @@ function render(){
   }
   drawBackground();
   drawFlag();
-  drawCastle();
+  drawTent();
   drawTiles();
   drawPlatforms();
   drawCoins();
@@ -1481,15 +1521,15 @@ function render(){
   drawHUD();
 
   if (game.state === "ready"){
-    drawText("WORLD " + (game.levelIdx + 1) + "-1", W/2, H/2 - 40, 3, "#fff", "center");
+    drawText("ACT " + (game.levelIdx + 1), W/2, H/2 - 40, 3, "#fff", "center");
     cx.drawImage(SPR.mSmall.idle, W/2 + 60, H/2 - 58, 20, 26);
     drawText("x 3", W/2 + 86, H/2 - 48, 2, "#fff", "center");
   } else if (game.state === "gameover"){
-    centerPanel(["GAME OVER"], "PRESS ENTER FOR TITLE");
+    centerPanel(["THE SHOW", "IS OVER"], "PRESS ENTER FOR TITLE");
   } else if (game.state === "win"){
-    centerPanel(["YOU SAVED", "THE KINGDOM!"], "SCORE " + game.score + "  —  PRESS ENTER");
+    centerPanel(["THE CIRCUS", "IS SAVED!"], "SCORE " + game.score + "  —  PRESS ENTER");
   } else if (game.state === "levelclear" && game.stateT > 0.5){
-    drawText("COURSE CLEAR!", W/2, 120, 2, "#fff", "center");
+    drawText("ACT CLEAR!", W/2, 120, 2, "#fff", "center");
     drawText("TIME BONUS " + (game.timeBonus || 0), W/2, 156, 1, "#ffd23e", "center");
   }
   if (game.paused){
@@ -1533,14 +1573,14 @@ function drawTitle(){
   }
   // title
   const bob = Math.sin(game.t * 2) * 4;
-  drawText("SUPER PIXEL BROS", W/2, 90 + bob, 5, "#e73c2e", "center");
-  drawText("SUPER PIXEL BROS", W/2 - 3, 87 + bob, 5, "#fff", "center");
-  drawText("A JUMPY LITTLE PLATFORMER", W/2, 180, 1, "#2a4a8a", "center");
+  drawText("CIRCUS JUMPER", W/2, 90 + bob, 5, "#e23b4e", "center");
+  drawText("CIRCUS JUMPER", W/2 - 3, 87 + bob, 5, "#fff", "center");
+  drawText("STEP RIGHT UP TO THE BIG TOP", W/2, 180, 1, "#2a4a8a", "center");
   // preview sprites
   cx.drawImage(SPR.mBig.idle, W/2 - 150, H - 150, 34, 62);
   cx.drawImage(SPR.mSmall.run[0], W/2 - 90, H - 138, 24, 32);
-  cx.drawImage(SPR.goomba[0], W/2 + 60, H - 132, 30, 28);
-  cx.drawImage(SPR.mush, W/2 + 120, H - 132, 30, 30);
+  cx.drawImage(SPR.clown[0], W/2 + 60, H - 132, 30, 28);
+  cx.drawImage(SPR.tophat, W/2 + 120, H - 132, 30, 30);
   cx.drawImage(SPR.coin, W/2 + 170, H - 132, 26, 26);
   if (Math.floor(game.t * 2) % 2 === 0)
     drawText("PRESS ENTER TO START", W/2, 260, 2, "#fff", "center");

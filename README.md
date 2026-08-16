@@ -1,13 +1,20 @@
-# Super Pixel Bros
+# Circus Jumper
 
-A complete Super Mario-style platformer in a single HTML file. No build step, no
+A complete circus-themed platformer in a single HTML file. No build step, no
 dependencies, no assets to download. Open `index.html` in any modern browser and
 play.
+
+You are the ringmaster. Stomp the clowns, grab the top hat, open the gift
+boxes, and reach the big top at the end of the act.
 
 This game was built as a demo of a large language model writing a full, polished
 game from a single prompt. The entire codebase was authored by **Qwen3.8-27B**
 running locally on an **AMD Ryzen AI Max+ "Strix Halo"** with **128 GB** of
 unified memory. No cloud API calls were made; the model ran on-device.
+
+> Note: the game was re-themed from a generic "Mario-style" brief to an original
+> circus theme so it does not use any Nintendo characters, names, or artwork. All
+> sprites, tiles, levels, and sound in this project are original.
 
 ## Run it
 
@@ -33,19 +40,19 @@ Or play the published version on GitHub Pages (URL below).
 | Space / W / Up | Jump |
 | Shift | Run |
 | P | Pause |
-| R | Restart level |
+| R | Restart act |
 | M | Toggle music |
 
 On phones and tablets, touch buttons appear automatically.
 
 ## Features
 
-- Two hand-built levels (day and night themes)
-- Small / big power-up states with a mushroom
-- Stompable goombas and flying paratroop enemies
-- Question blocks, breakable bricks, pipes, coins, and moving platforms
+- Two hand-built acts (day and night themes)
+- Small / big power-up states with a top hat
+- Stompable clowns and falling-clown enemies
+- Gift boxes, breakable bricks, pipes, coins, and moving platforms
 - Score, coin, life, and timer HUD
-- A flag-pole level-clear sequence and a victory screen
+- A flag-pole act-clear sequence and a victory screen
 - Procedural pixel-art sprites and parallax backgrounds drawn on a canvas
 - A chiptune soundtrack and sound effects generated with the Web Audio API
 - Screen shake, particles, and squash-and-stretch animation
@@ -63,7 +70,8 @@ The whole game was produced from one instruction:
 Qwen3.8-27B wrote the HTML, the CSS, and roughly 1,500 lines of JavaScript in one
 pass, including the physics, the level data, the sprite generator, and the audio
 engine. It was then tested headlessly (with a stubbed browser environment) and a
-static level-clearability analysis to confirm both levels are completable.
+static level-clearability analysis to confirm both acts are completable. The
+artwork was later re-themed to an original circus style.
 
 ### Why Strix Halo + 128 GB matters
 
